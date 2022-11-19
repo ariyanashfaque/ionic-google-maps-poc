@@ -1,8 +1,6 @@
 import { ModalController, Platform } from "@ionic/angular";
 import { MapService } from "src/app/services/map.service";
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { NativeMapService } from "src/app/services/native-map/native-map.service";
-import { BrowserMapService } from "src/app/services/browser-map/browser-map.service";
 
 @Component({
   selector: "app-add-map",
@@ -16,26 +14,27 @@ export class AddMapPage implements OnInit {
   nativeDevice: boolean = false;
   center: google.maps.LatLngLiteral = { lat: 24, lng: 12 };
 
-  constructor(
-    private platform: Platform,
-    private nativeMapService: NativeMapService
-  ) {}
+  constructor(private platform: Platform, private mapService: MapService) {}
 
-  ionViewWillEnter() {
-    if (this.platform.is("android") && this.platform.is("ios")) {
+  ngOnInit() {
+    if (this.platform.is("android") || this.platform.is("ios")) {
       this.nativeDevice = true;
     }
+    this.mapService.getCurrentPosition();
   }
 
-  ngOnInit() {}
+  ionViewDidEnter() {}
 
-  ngAfterViewInit() {
-    this.nativeMapService.getCurrentPosition();
+  async handleAddWebMap() {
+    // this.mapService.getCurrentPosition();
+    if (this.mapService.position) {
+      this.mapService.createMapForWeb(this.mapRef);
+    }
   }
-
-  async handleAddMap() {
-    if (this.nativeMapService.position) {
-      await this.nativeMapService.createMapForDevice(this.mapRef);
+  async handleAddDeviceMap() {
+    // this.mapService.getCurrentPosition();
+    if (this.mapService.position) {
+      this.mapService.createMapForDevice(this.mapRef);
     }
   }
 }

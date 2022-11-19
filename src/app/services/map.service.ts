@@ -53,7 +53,7 @@ export class MapService {
         mapTypeControl: false,
         center: this.position,
         mapTypeId: "satellite",
-        disableDefaultUI: false,
+        disableDefaultUI: true,
       },
       forceCreate: true,
     });
@@ -61,6 +61,7 @@ export class MapService {
     await this.addMarker(this.position.lat, this.position.lng);
     await this.addListeners();
   }
+
   public async createMapForDevice(map: ElementRef) {
     this.map = await GoogleMap.create({
       id: "capacitor-google-maps",
@@ -129,30 +130,34 @@ export class MapService {
       this.addMarker(event.latitude, event.longitude);
     });
 
-    await this.map.setOnMarkerDragEndListener(async (event) => {
-      if (event.markerId) this.removeMarker(event.markerId);
-      this.markers = this.markers.filter(
-        (marker) => marker.markerId !== event.markerId
-      );
+    // await this.map.setOnMarkerDragEndListener(async (event) => {
+    //   if (event.markerId) this.removeMarker(event.markerId);
+    //   this.markers = this.markers.filter(
+    //     (marker) => marker.markerId !== event.markerId
+    //   );
 
-      this.markers.push({
-        markerId: (parseInt(this.markerId) + 1).toString(),
-        coordinate: {
-          lat: event.latitude,
-          lng: event.longitude,
-        },
-        draggable: true,
-      });
+    //   this.markers.push({
+    //     markerId: (parseInt(this.markerId) + 1).toString(),
+    //     coordinate: {
+    //       lat: event.latitude,
+    //       lng: event.longitude,
+    //     },
+    //     draggable: true,
+    //   });
 
-      await this.map.addMarkers([
-        {
-          coordinate: {
-            lat: event.latitude,
-            lng: event.longitude,
-          },
-          draggable: true,
-        },
-      ]);
+    //   await this.map.addMarkers([
+    //     {
+    //       coordinate: {
+    //         lat: event.latitude,
+    //         lng: event.longitude,
+    //       },
+    //       draggable: true,
+    //     },
+    //   ]);
+    // });
+
+    await this.map.setOnInfoWindowClickListener((event) => {
+      console.log(event);
     });
 
     console.log("Markers:", this.markers);

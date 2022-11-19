@@ -1,5 +1,5 @@
 <!-- <ion-header>
-  <ion-toolbar>
+  <ion-toolbar [translate]="true">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -8,6 +8,15 @@
 </ion-header> -->
 
 <ion-content [fullscreen]="true">
+  <ion-toolbar class="tool" slot="fixed">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-button color="secondary">
+      Add Web Map
+    </ion-button>
+  </ion-toolbar>
+
   <div id="container">
     <capacitor-google-maps id="map" #map></capacitor-google-maps>
   </div>
@@ -15,8 +24,21 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button expand="full" color="secondary" (click)="handleAddMap()">
-      Add Map
+    <ion-button
+      expand="block"
+      color="secondary"
+      *ngIf="!nativeDevice"
+      (click)="handleAddWebMap()"
+    >
+      Add Web Map
+    </ion-button>
+    <ion-button
+      expand="full"
+      color="secondary"
+      *ngIf="nativeDevice"
+      (click)="handleAddDeviceMap()"
+    >
+      Add Device Map
     </ion-button>
   </ion-toolbar>
 </ion-footer>
