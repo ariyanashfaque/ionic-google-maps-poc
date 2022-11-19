@@ -1,0 +1,22 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Map</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <capacitor-google-maps id="map" #map></capacitor-google-maps>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" color="secondary" (click)="handleAddMap()">
+      Add Map
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

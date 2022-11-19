@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <capacitor-google-map id="map" #map></capacitor-google-map>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" color="secondary" (click)="handleViewMap()">
+      View Map
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
