@@ -1,20 +1,79 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+<ion-header [translucent]="true" no-border slot="fixed">
+  <ion-toolbar lines="none" no-border-bottom>
+    <ion-title>
+      Add New Address
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar lines="none" no-border-bottom>
+    <div class="hContent SearchBar">
+      <input type="search" animated placeholder="Search Location" />
+    </div>
+    <ion-buttons slot="end">
+      <ion-button>
+        cancel
+      </ion-button>
     </ion-buttons>
-    <ion-title>View Map</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<ion-content [fullscreen]="true">
   <capacitor-google-map id="map" #map></capacitor-google-map>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-button expand="full" color="secondary" (click)="handleViewMap()">
-      View Map
-    </ion-button>
-  </ion-toolbar>
+  <div class="cardBlock">
+    <form class="form">
+      <div>
+        <div class="title">
+          <h6>Add address</h6>
+          <ion-button color="light" shape="round" size="small">
+            <ion-icon name="arrow-down"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ion-radio-group mode="md">
+          <ion-row>
+            <ion-col size="4">
+              <ion-item lines="none">
+                <ion-label>Home</ion-label>
+                <ion-radio slot="start" value="Home"></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item lines="none">
+                <ion-label>Office</ion-label>
+                <ion-radio slot="start" value="Office"></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item lines="none">
+                <ion-label>Other</ion-label>
+                <ion-radio slot="start" value="Other"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+      </div>
+      <div>
+        <h6>Location Title</h6>
+        <ion-input enterkeyhint="done" placeholder="Location Title"></ion-input>
+      </div>
+
+      <div>
+        <h6>Location Details</h6>
+        <ion-textarea
+          enterkeyhint="done"
+          placeholder="Location Details"
+        ></ion-textarea>
+      </div>
+      <div>
+        <div>
+          <h6>Mobile</h6>
+          <ion-input enterkeyhint="done" placeholder="Mobile"></ion-input>
+        </div>
+        <ion-button expand="block" type="submit">
+          Save Address
+        </ion-button>
+      </div>
+    </form>
+  </div>
 </ion-footer>

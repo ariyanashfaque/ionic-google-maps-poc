@@ -11,7 +11,6 @@ export class MapService {
   map: GoogleMap;
   markerId: string;
   markers: any[] = [];
-  mapStyles: google.maps.MapTypeStyle[];
   position: { lat: number; lng: number };
   watchPosition: { lat: number; lng: number };
 
@@ -21,6 +20,9 @@ export class MapService {
     const coordinates = await Geolocation.getCurrentPosition({
       enableHighAccuracy: true,
     });
+
+    console.log(coordinates);
+
 
     this.position = {
       lat: coordinates.coords.latitude,
